@@ -5,9 +5,10 @@ import Config
 # The MIX_TEST_PARTITION environment variable can be used
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
+
 config :tech_challenge, TechChallenge.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "123456789",
   hostname: "localhost",
   database: "tech_challenge_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,

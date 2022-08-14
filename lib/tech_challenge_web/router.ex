@@ -8,6 +8,7 @@ defmodule TechChallengeWeb.Router do
     plug :put_root_layout, {TechChallengeWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug TechChallengeWeb.Auth
   end
 
   pipeline :api do
@@ -18,6 +19,14 @@ defmodule TechChallengeWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/comments", CommentsController, :index
+    get "/Publications", PublicationsController, :index
+
+    get "/users/signup", UsersController, :signup
+    post "/users/signup", UsersController, :register
+
+    resources "/session", SessionController, only: [:new, :create, :delete]
+
   end
 
   # Other scopes may use custom stacks.

@@ -24,6 +24,7 @@ defmodule TechChallenge.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import TechChallenge.DataCase
+      import TechChallenge.TestHelpers
     end
   end
 

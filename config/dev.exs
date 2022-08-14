@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :tech_challenge, TechChallenge.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "123456789",
   hostname: "localhost",
   database: "tech_challenge_dev",
   stacktrace: true,
