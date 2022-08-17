@@ -2,7 +2,7 @@
 
 <ul>
     <%= if @current_user do %>
-            <%= link "+ Create Post ", to: Routes.publications_path(@conn, :index) %> &nbsp;
+            <%= link "+ Create Post ", to: Routes.posts_path(@conn, :new) %> &nbsp;
         |   <%= @current_user.username %> &nbsp;
         |   <%= link "Log out", to: Routes.session_path(@conn, :delete, @current_user), method: "delete" %>
         <% else %>

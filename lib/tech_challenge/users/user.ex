@@ -3,34 +3,37 @@ defmodule TechChallenge.Users.User do
   import Ecto.Changeset
 
   alias TechChallenge.RegExp
+  alias TechChallenge.Posts.Post
+  alias TechChallenge.Posts.Comment
 
-  @fields ~w(username email password)a
+  @fields ~w(image username email password)a
 
   schema "users" do
+    field :image, :string
     field :username, :string
     field :email, :string
     field :encrypted_password, :string
     field :password, :string, virtual: true
 
     #relationships
-    #has_many :publications
-    #has_many :comments
+    has_many :comments, Comment
+    has_many :posts, Post
 
     timestamps()
   end
 
-  def changeset(user, attrs \\ %{}) do
+  def changeset(user, params \\ %{}) do
     user
-    |> cast(attrs, @fields)
+    |> cast(params, @fields)
     |> validate_required(@fields)
   end
 
-  def register_changeset(user, attrs) do
+  def register_changeset(user, params \\ %{}) do
     user
-    |> cast(attrs, @fields)
+    |> cast(params, @fields)
     |> validate_required(@fields)
     |> validate_format(:username, RegExp.slug(), message: RegExp.slug_message)
-    |> validate_length(:username, max: 40, message: "Max. 40 chars")
+    |> validate_length(:username, max: 40, message: RegExp.max_char_40_message)
     |> validate_format(:email, RegExp.email())
     |> unique_constraint(:username)
     |> validate_length(:password, min: 4)

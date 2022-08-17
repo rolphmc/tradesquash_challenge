@@ -3,6 +3,7 @@ defmodule TechChallenge.Repo.Migrations.Users do
 
   def change do
     create table(:users) do
+      add :image, :string
       add :username, :string, null: false
       add :email, :string, null: false
       add :encrypted_password, :string

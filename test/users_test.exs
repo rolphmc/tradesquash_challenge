@@ -2,18 +2,19 @@ defmodule TechChallenge.UsersTest do
   use TechChallenge.DataCase
 
   alias TechChallenge.Users
-  alias TechChallenge.Users.User
 
   describe "register_user/1" do
     @valid_attrs %{
       username: "admin",
+      image: "https://cdn.com",
       email: "admin@admin.com",
       password: "secret"
     }
     @invalid_attrs %{}
 
     test "with valid data inserts user" do
-      assert {:ok, %User{id: id} = user} = Users.register_user(@valid_attrs)
+      assert {:ok, user} = Users.register_user(@valid_attrs)
+      assert user.image == "https://cdn.com"
       assert user.username == "admin"
       assert user.email == "admin@admin.com"
     end
@@ -23,7 +24,7 @@ defmodule TechChallenge.UsersTest do
     end
 
     test "verify unique usernames" do
-      assert {:ok, %User{id: id}} = Users.register_user(@valid_attrs)
+      assert {:ok, _user} = Users.register_user(@valid_attrs)
       assert {:error, changeset} = Users.register_user(@valid_attrs)
       assert %{username: ["has already been taken"]} = errors_on(changeset)
     end

@@ -7,8 +7,8 @@ defmodule TechChallenge.Repo.Migrations.Posts do
       add :anonymouns, :boolean
       add :description, :text, null: false
       add :title, :string, null: false
-      add :category1_id, references(:categories)
-      add :category2_id, references(:categories)
+      add :category1, :integer
+      add :category2, :integer
       add :user_id, references(:users)
 
       timestamps()

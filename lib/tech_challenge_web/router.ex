@@ -20,7 +20,7 @@ defmodule TechChallengeWeb.Router do
 
     get "/", PageController, :index
     get "/comments", CommentsController, :index
-    get "/Publications", PublicationsController, :index
+    get "/posts", PostsController, :new
 
     get "/users/signup", UsersController, :signup
     post "/users/signup", UsersController, :register
