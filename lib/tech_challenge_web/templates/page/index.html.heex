@@ -1,31 +1,36 @@
-<h1>Welcome to My Blog!</h1>
+<nav class="nav-main">
+    <h1>Welcome to My Blog!</h1>
+    <ul>
+        <%= if @current_user do %>
+                <%= link "+ Create Post ", to: Routes.posts_path(@conn, :new) %> &nbsp;
+            |   <%= link "Log out", to: Routes.session_path(@conn, :delete, @current_user), method: "delete" %> &nbsp;
+            |   User: <%= @current_user.username %>
+            <% else %>
+                <%= link "Login", to: Routes.session_path(@conn, :new) %>
+            |   <%= link "Sign up", to: Routes.users_path(@conn, :signup) %>
+        <% end %>
+    </ul>
+    <hr>
+</nav>
 
-<ul>
-    <%= if @current_user do %>
-            <%= link "+ Create Post ", to: Routes.posts_path(@conn, :new) %> &nbsp;
-        |   <%= @current_user.username %> &nbsp;
-        |   <%= link "Log out", to: Routes.session_path(@conn, :delete, @current_user), method: "delete" %>
-        <% else %>
-            <%= link "Login", to: Routes.session_path(@conn, :new) %>
-        |   <%= link "Sign up", to: Routes.users_path(@conn, :signup) %>
+<article class="cards-group">
+    <%= for posts <- @posts do %>
+    <article class="cards">
+        <img src={posts.image} height="100" width="100" alt="icon post" class="icon-img" />
+        <h2><%= posts.title %></h2>
+        <h6># <%= posts.category1 %> | # <%= posts.category2 %> </h6>
+        <p><%= posts.description %></p>
+        <div class="knowledge-level-div">
+            <span style="width:60%" class="knowledge-level"><th> <%= posts.categories %></th></span>
+        </div>
+        <div class="discuss">
+                <%= link "Discuss", to: Routes.comments_path(@conn, :index) %>
+            |   <%= link " edit", to: Routes.posts_path(@conn, :edit, posts.id) %>
+            |   <%= link " delete", to: Routes.posts_path(@conn, :delete, posts.id), method: :delete, data: [confirm: "Are you sure?"] %>
+        </div> <!--posts.id após index-->
+    </article>
     <% end %>
-</ul>
-
-<!--esse trecho sera remanejado para post.html-->
-<hr>
-<img alt="" height="50" width="50" src="https://rolphmc.github.io/portfolio-rolph/img/phoenix.png">
-<h3>logged by jerodsanto</h3>
-<h2>Phoenix 1.4 released!</h2>
-<h5>2018-11-08T14:33:00Z | #Category </h5>
-<p>
-    This release ships with exciting new features, most notably HTTP2 support, improved development experience with faster compile times, new error pages, and local SSL certificate generation.
-
-    I’m excited to upgrade us so we can get up and running on H2! 💪
-</p>
-<button type="button">Discuss (n)</button>
-<button type="button" disabled="true">Edit</button>
-<button type="button" disabled="true">delet</button>
-<!--esse trecho sera remanejado para post.html-->
+</article>
 
 
 

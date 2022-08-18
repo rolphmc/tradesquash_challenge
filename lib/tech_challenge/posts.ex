@@ -18,7 +18,11 @@ defmodule TechChallenge.Posts do
       iex> list_posts()
       [%Post{}, ...]
   """
-  def list_posts(), do: Repo.all(Post)
+  def list_posts() do
+    Post
+    |> Post.list_all_books()
+    |> Repo.all()
+  end
 
   @doc """
   Gets a single post by its id.

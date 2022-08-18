@@ -1,6 +1,7 @@
 defmodule TechChallenge.Posts.Post do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query
 
   alias TechChallenge.RegExp
   alias TechChallenge.Users.User
@@ -38,5 +39,9 @@ defmodule TechChallenge.Posts.Post do
     |> cast(params, @fields)
     |> validate_required(@fields)
     |> validate_format(:image, RegExp.http, mensage: RegExp.http_message)
+  end
+
+  def list_all_books(query) do
+    from c in query, order_by: [desc: c.inserted_at]
   end
 end
