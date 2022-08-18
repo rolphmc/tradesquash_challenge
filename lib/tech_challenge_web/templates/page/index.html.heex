@@ -24,7 +24,7 @@
             <span style="width:60%" class="knowledge-level"><th> <%= posts.categories %></th></span>
         </div>
         <div class="discuss">
-                <%= link "Discuss", to: Routes.comments_path(@conn, :index) %>
+                <%= link "Discuss", to: Routes.comments_path(@conn, :show, posts.id) %>
             |   <%= link " edit", to: Routes.posts_path(@conn, :edit, posts.id) %>
             |   <%= link " delete", to: Routes.posts_path(@conn, :delete, posts.id), method: :delete, data: [confirm: "Are you sure?"] %>
         </div> <!--posts.id após index-->

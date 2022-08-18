@@ -1,10 +1,24 @@
-<!--esse trecho sera remanejado para form.html-->
-<div style="background-color:gainsboro; padding: 5px;">
-    <form action="">
-        <input type="checkbox" id="" name="" value="true">
-        <label for="anonymous"> anonymous speech??</label><br>
-        <textarea class="" name="new_discuss[content]]" placeholder="Your discuss..." rows="1" style="overflow: hidden; overflow-wrap: break-word; height: 58px; user-select: text;"></textarea>
-        <input type="submit" class="discuss_form" value="Comment" style="user-select: text;">
-    </form>
-</div>
-<!--esse trecho sera remanejado para form.html-->
+<article class="cards-group">
+    <article class="cards-login">
+        <.form let={f} for={@changeset} action={@action}>   
+            
+            <br> 
+            <%= if @changeset.action do %>
+                <div class="alert alert-danger">
+                    <p> Something went wrong! check below </p>
+                </div>
+            <% end %>
+
+            <br><br>            
+            <%= label f, :anonymouns %>
+            <%= checkbox f, :anonymouns %>
+            <%= error_tag f, :anonymouns %>        
+            <%= label f, :content %><br>
+            <%= textarea f, :content %>
+            <%= error_tag f, :content %>    
+            <br><br><br>
+            <div><%= submit "Save" %></div>
+            <br>
+        </.form>
+    </article>
+</article>

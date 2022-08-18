@@ -29,7 +29,7 @@ defmodule TechChallenge.Posts do
   We can use this function to visualize a post's content.
   """
   def get_post!(id) do
-    Post |> Repo.get!(id) |> Repo.preload([:comments])
+    Post |> Repo.get!(id) |> Repo.preload([[comments: :user], :user])
     |> handle_categories()
   end
 
@@ -96,6 +96,8 @@ defmodule TechChallenge.Posts do
   end
 
   def list_comments(), do: Repo.all(Comment)
+
+  def change_comments(%Comment{} = comment), do: Comment.changeset(comment, %{})
 
   #|------------------- General
 

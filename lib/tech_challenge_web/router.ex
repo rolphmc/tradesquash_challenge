@@ -19,7 +19,7 @@ defmodule TechChallengeWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/comments", CommentsController, :index
+    resources "/comments", CommentsController
     resources "/posts", PostsController, only: [:new, :create, :delete, :edit, :update]
 
 
